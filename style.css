@@ -1,0 +1,196 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f8f8f0;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #5a4740; /* Brunâtre */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+#params, #results {
+    flex: 1;
+    min-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#params {
+    background-color: #f0eade; /* Beige clair */
+}
+
+.param-group {
+    margin-bottom: 15px;
+}
+
+.param-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #665a54;
+}
+.param-group label input[type="radio"],
+.param-group label input[type="checkbox"] {
+    margin-right: 5px;
+    font-weight: normal; /* Pour le texte à côté des radio/checkbox */
+}
+.param-group label span,
+.param-group > span { /* Pour les petites notes */
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #777;
+    display: inline;
+}
+
+
+input[type="number"],
+input[type="datetime-local"],
+select {
+    width: calc(100% - 16px); /* Ajustement padding */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    background-color: #fff; /* Fond blanc par défaut */
+    color: #333;
+}
+
+
+input:disabled,
+select:disabled {
+    background-color: #eee; /* Grisé si désactivé */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+label:has(input[type="radio"]:disabled) { /* Style pour le label d'un radio désactivé */
+     color: #999;
+     cursor: not-allowed;
+}
+
+.param-group label span.subtle-note,
+.param-group span.calculated-note {
+    font-weight: normal;
+    font-size: 0.85em;
+    color: #888;
+    display: block; /* Mettre sur ligne séparée */
+    margin-top: -2px;
+     margin-left: 5px;
+}
+
+/* Style pour masquer/afficher */
+.hidden {
+    display: none;
+}
+
+#scheduleBasis {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+input[type="number"]:focus,
+input[type="datetime-local"]:focus,
+select:focus {
+    outline: none;
+    border-color: #8a746a;
+    box-shadow: 0 0 3px #8a746a;
+}
+
+
+.result-group {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #ccc;
+}
+.result-group:last-child {
+    border-bottom: none;
+}
+
+.result-group h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+#levainIngredientsList,
+#painIngredientsList,
+#scheduleList {
+    list-style: none;
+    padding-left: 0;
+}
+
+#levainIngredientsList li,
+#painIngredientsList li {
+    margin-bottom: 5px;
+}
+#painIngredientsList li strong {
+    color: #5a4740;
+}
+
+
+#scheduleList li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Pour les petits écrans */
+}
+#scheduleList li:last-child {
+    border-bottom: none;
+}
+
+#scheduleList .time-absolute {
+    font-weight: bold;
+    color: #333;
+    min-width: 180px; /* Alignement */
+}
+#scheduleList .time-relative {
+    font-style: italic;
+    color: #666;
+    min-width: 100px; /* Alignement */
+    text-align: right;
+}
+#scheduleList .action {
+   flex-basis: 100%; /* Mettre l'action sur sa propre ligne si manque de place */
+   margin-top: 4px;
+   color: #444;
+}
+
+@media (min-width: 768px) {
+     #scheduleList .action {
+        flex-basis: auto; /* Remettre sur la même ligne */
+        margin-top: 0;
+        order: -1; /* Mettre l'action en premier */
+        min-width: 200px; /* Espace pour l'action */
+        text-align: left;
+    }
+     #scheduleList .time-absolute {
+        min-width: auto;
+    }
+     #scheduleList .time-relative {
+        min-width: auto;
+    }
+}
+
+
+/* Style pour masquer/afficher */
+.hidden {
+    display: none;
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant Pain au Levain</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Assistant Pain au Levain</h1>
+
+    <div class="container">
+        <section id="params">
+            <h2>Paramètres</h2>
+
+            <div class="param-group">
+                <label>Mode de calcul (Quantités) :</label>
+                <label><input type="radio" name="mode" value="weight" checked> Je vise un poids final</label>
+                <label><input type="radio" name="mode" value="starter"> J'ai du levain prêt</label>
+            </div>
+
+            <div class="param-group" id="weight-input-group">
+                <label for="finalWeight">Poids final du pain souhaité (g) :</label>
+                <input type="number" id="finalWeight" value="1000" min="300">
+            </div>
+
+            <div class="param-group" id="starter-input-group" style="display: none;">
+                <label for="starterAmount">Quantité de levain "tout point" disponible (g) :</label>
+                <input type="number" id="starterAmount" value="240" min="50">
+            </div>
+
+            <div class="param-group" id="starter-state-group">
+                <label for="starterState">État du levain initial :</label>
+                <select id="starterState">
+                    <option value="fresh">Frais / Température ambiante (<4-5 jours)</option>
+                    <option value="fridge_short">Sort du frigo (< 7 jours)</option>
+                    <option value="fridge_long">Sort du frigo (> 7 jours)</option>
+                </select>
+            </div>
+
+            <div class="param-group">
+                <label for="ambientTemp">Température ambiante approx. (°C) :</label>
+                <input type="number" id="ambientTemp" value="22" min="15" max="30">
+                <span>(Utilisé pour estimer les temps de pousse)</span>
+            </div>
+
+            <div class="param-group">
+                <label><input type="checkbox" id="fridgeProof"> Façonnage la veille (pousse longue au frigo)</label>
+            </div>
+
+            <div class="param-group">
+                <label><input type="checkbox" id="addIns"> Ajouter ~10% graines/fruits secs</label>
+                <span>(Quantité indicative basée sur le poids de farine)</span>
+            </div>
+
+            <!-- NOUVEAU: Choix de la direction du planning -->
+            <div class="param-group">
+                <label>Planification basée sur :</label>
+                <label><input type="radio" name="calcDirection" value="from_end" checked> Date de fin de cuisson</label>
+                <label id="from_start_label"><input type="radio" name="calcDirection" value="from_start" id="calcFromStartRadio" disabled> Date de début du 1er rafraîchi</label>
+                <span id="from_start_note" class="subtle-note">(Nécessite levain > 7j au frigo)</span>
+            </div>
+            <!-- /NOUVEAU -->
+
+            <div class="param-group">
+                <label for="bakeEndTime">Date et Heure de fin de cuisson :</label>
+                <input type="datetime-local" id="bakeEndTime" required>
+                 <span class="calculated-note">(Calculée si planification depuis début)</span>
+            </div>
+
+             <!-- NOUVEAU: Champ pour début rafraichi 1 -->
+             <div class="param-group">
+                <label for="refresh1StartTime">Date et Heure de début du 1er rafraîchi :</label>
+                <input type="datetime-local" id="refresh1StartTime" disabled>
+                 <span class="calculated-note">(Calculée si planification depuis fin)</span>
+            </div>
+             <!-- /NOUVEAU -->
+
+        </section>
+
+        <section id="results">
+            <h2>Recette Calculée et Planning</h2>
+
+            <div id="estimated-weight-result" class="result-group" style="display: none;">
+                 <h3>Poids final estimé</h3>
+                 <p id="estimatedWeight">--- g</p>
+            </div>
+
+            <div id="ingredients-levain-result" class="result-group">
+                <h3>Ingrédients pour le Levain</h3>
+                <ul id="levainIngredientsList">
+                    <li>Calcul en cours...</li>
+                </ul>
+            </div>
+
+            <div id="ingredients-pain-result" class="result-group">
+                <h3>Ingrédients pour le Pain</h3>
+                <ul id="painIngredientsList">
+                    <li>Calcul en cours...</li>
+                </ul>
+            </div>
+
+             <!-- NOUVEAU: Affichage date clé calculée -->
+             <div id="calculated-time-result" class="result-group" style="display: none;">
+                <h3>Heure clé calculée</h3>
+                <p id="calculatedTimeKey">---</p>
+                <p id="calculatedTimeValue">---</p>
+             </div>
+            <!-- /NOUVEAU -->
+
+
+            <div id="schedule-result" class="result-group">
+                <h3>Planning Détaillé</h3>
+                <p id="scheduleBasis"><em>(Basé sur l'heure de sortie du four)</em></p>
+                <ol id="scheduleList">
+                    <li>Calcul en cours...</li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
